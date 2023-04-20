@@ -1,0 +1,58 @@
+<div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
+  <div class="app-main">
+      <div class="app-main__outer">
+          <div class="app-main__inner">
+              <div class="app-page-title">
+                  <div class="page-title-wrapper">
+                     
+                  </div>
+                  <div class="container">
+                      <h2 *ngIf="state">Districts - {{state.name}}</h2>
+                      <form class="mt-5" [formGroup]="formdata" (ngSubmit)="submit(formdata.value)">
+                          <label class="form-label text-capitalize fw-bold">District*<span *ngIf="formdata.controls.name.touched && formdata.controls.name.invalid" class="text-danger small">Please Enter District</span></label>
+                          <input type="hidden" class="form-control" formControlName="stateid"><br>
+                          <input type="text" class="form-control" formControlName="name"><br>
+                          <button [disabled]="!formdata.valid" type="submit"  class="btn btn-success text-capitalize">save</button>
+                      </form>
+                  </div>
+              </div>
+              <div class="tabs-animation">
+                  <div class="card mb-3">
+                      <div class="card-body">
+                          <p class="text-right text-danger text-capitalize">count: {{forcount}}</p>
+                          <table class="table table-hover table-striped table-bordered">
+                              <thead>
+                                  <tr class="text-center">
+                                      <th style="width:150px;">Actions</th>
+                                      <th style="width:80px;">No</th>
+                                      <th>Name</th>
+                                      <th>Talukas</th>
+                                  </tr>
+                              </thead>
+                              <tbody *ng>
+                                  <tr class="text-center" *ngFor="let district of districts let i = index">
+                                      <td>
+                                          <button type="button" class="btn btn-success text-capitalize mx-2 btn-sm"
+                                              (click)="edit(district.id)">edit</button>
+                                          <button type="button" class="btn btn-danger text-capitalize btn-sm"
+                                              (click)="delete(district.id)">delete</button>
+                                      </td>
+                                      <td>{{i + 1}}</td>
+                                      <td>{{district.name}}</td>
+                                      <td>
+                                        <button routerLink="/masters/talukas" class="mb-2 mr-2 btn-icon btn-square btn btn-primary"><i
+                                          class="lnr-location btn-icon-wrapper"> </i>Talukas</button>
+                                      </td>
+                                  </tr>
+                              </tbody>
+
+                          </table>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+
+      </div>
+   </div>
+</div>
